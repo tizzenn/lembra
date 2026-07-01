@@ -10,14 +10,13 @@ import com.lembra.app.data.CalculadoraOcurrencias
 import com.lembra.app.data.Categoria
 import com.lembra.app.data.FichaAlerta
 import com.lembra.app.databinding.ItemFichaBinding
-import java.text.SimpleDateFormat
-import java.util.Locale
+import java.text.DateFormat
 
 class FichaAdapter(
     private val onClick: (FichaAlerta) -> Unit
 ) : ListAdapter<FichaAlerta, FichaAdapter.FichaViewHolder>(DIFF_CALLBACK) {
 
-    private val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES"))
+    private val formatoFecha = DateFormat.getDateInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FichaViewHolder {
         val binding = ItemFichaBinding.inflate(LayoutInflater.from(parent.context), parent, false)

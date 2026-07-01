@@ -5,8 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationManagerCompat
 import com.lembra.app.R
-import java.text.SimpleDateFormat
-import java.util.Locale
+import java.text.DateFormat
 
 class ReminderReceiver : BroadcastReceiver() {
 
@@ -16,7 +15,7 @@ class ReminderReceiver : BroadcastReceiver() {
         val fechaOcurrencia = intent.getLongExtra("extra_fecha_ocurrencia", 0L)
         val diasAviso = intent.getIntExtra("extra_dias_aviso", 0)
 
-        val formato = SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES"))
+        val formato = DateFormat.getDateInstance()
         val fechaTexto = formato.format(fechaOcurrencia)
 
         val notifTitulo = context.getString(R.string.notificacion_titulo, titulo)

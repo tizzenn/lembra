@@ -15,9 +15,8 @@ import com.lembra.app.databinding.ActivityAddEditCardBinding
 import com.lembra.app.notification.NotificationScheduler
 import com.lembra.app.ui.crearChipIcono
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
+import java.text.DateFormat
 import java.util.Calendar
-import java.util.Locale
 
 class AddEditCardActivity : AppCompatActivity() {
 
@@ -28,7 +27,7 @@ class AddEditCardActivity : AppCompatActivity() {
     private var fichaExistente: FichaAlerta? = null
     private var categoriaSeleccionada: Categoria = Categoria.MISC
     private var fechaInicioMillis: Long? = null
-    private val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale("es", "ES"))
+    private val formatoFecha = DateFormat.getDateInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

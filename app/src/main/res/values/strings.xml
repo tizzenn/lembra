@@ -1,49 +1,49 @@
 <resources>
     <string name="app_name">Lembra</string>
 
-    <!-- Lista principal -->
-    <string name="titulo_lista">Mis alertas</string>
-    <string name="sin_fichas">No tienes fichas todavía.\nToca + para crear la primera.</string>
-    <string name="filtro_todas">Todas</string>
+    <!-- Main list -->
+    <string name="titulo_lista">My alerts</string>
+    <string name="sin_fichas">No cards yet.\nTap + to create your first one.</string>
+    <string name="filtro_todas">All</string>
 
-    <!-- Categorías -->
-    <string name="cat_coche">Coche</string>
-    <string name="cat_moto">Moto</string>
-    <string name="cat_casa">Casa</string>
-    <string name="cat_mascotas">Mascotas</string>
-    <string name="cat_misc">Varios</string>
+    <!-- Categories -->
+    <string name="cat_coche">Car</string>
+    <string name="cat_moto">Motorbike</string>
+    <string name="cat_casa">Home</string>
+    <string name="cat_mascotas">Pets</string>
+    <string name="cat_misc">Other</string>
 
-    <!-- Formulario -->
-    <string name="titulo_nueva_ficha">Nueva ficha</string>
-    <string name="titulo_editar_ficha">Editar ficha</string>
-    <string name="campo_titulo">Título</string>
-    <string name="campo_categoria">Categoría</string>
-    <string name="campo_fecha_inicio">Fecha de inicio</string>
-    <string name="campo_repetir_cada">Repetir cada</string>
-    <string name="campo_repetir_veces">Número de repeticiones</string>
-    <string name="campo_dias_aviso">Avisar con antelación (días)</string>
-    <string name="campo_notas">Notas (opcional)</string>
-    <string name="unidad_dias">Días</string>
-    <string name="unidad_semanas">Semanas</string>
-    <string name="unidad_meses">Meses</string>
-    <string name="unidad_anios">Años</string>
-    <string name="boton_guardar">Guardar</string>
-    <string name="boton_eliminar">Eliminar</string>
-    <string name="boton_seleccionar_fecha">Seleccionar fecha</string>
-    <string name="error_titulo_vacio">Ponle un título a la ficha</string>
-    <string name="error_fecha_vacia">Selecciona una fecha de inicio</string>
-    <string name="dialogo_eliminar_titulo">Eliminar ficha</string>
-    <string name="dialogo_eliminar_mensaje">¿Seguro que quieres eliminar esta ficha? Se cancelarán sus avisos.</string>
-    <string name="cancelar">Cancelar</string>
+    <!-- Form -->
+    <string name="titulo_nueva_ficha">New card</string>
+    <string name="titulo_editar_ficha">Edit card</string>
+    <string name="campo_titulo">Title</string>
+    <string name="campo_categoria">Category</string>
+    <string name="campo_fecha_inicio">Start date</string>
+    <string name="campo_repetir_cada">Repeat every</string>
+    <string name="campo_repetir_veces">Number of repetitions</string>
+    <string name="campo_dias_aviso">Notify in advance (days)</string>
+    <string name="campo_notas">Notes (optional)</string>
+    <string name="unidad_dias">Days</string>
+    <string name="unidad_semanas">Weeks</string>
+    <string name="unidad_meses">Months</string>
+    <string name="unidad_anios">Years</string>
+    <string name="boton_guardar">Save</string>
+    <string name="boton_eliminar">Delete</string>
+    <string name="boton_seleccionar_fecha">Pick a date</string>
+    <string name="error_titulo_vacio">Give the card a title</string>
+    <string name="error_fecha_vacia">Select a start date</string>
+    <string name="dialogo_eliminar_titulo">Delete card</string>
+    <string name="dialogo_eliminar_mensaje">Are you sure you want to delete this card? Its reminders will be cancelled.</string>
+    <string name="cancelar">Cancel</string>
 
-    <!-- Tarjeta de la lista -->
-    <string name="proximo_aviso">Próximo: %1$s</string>
-    <string name="repeticiones_restantes">Quedan %1$d de %2$d</string>
-    <string name="sin_repeticiones_restantes">Finalizada</string>
+    <!-- List card -->
+    <string name="proximo_aviso">Next: %1$s</string>
+    <string name="repeticiones_restantes">%1$d of %2$d left</string>
+    <string name="sin_repeticiones_restantes">Finished</string>
 
-    <!-- Notificación -->
-    <string name="canal_notificaciones_nombre">Avisos de Lembra</string>
-    <string name="canal_notificaciones_desc">Notificaciones de vencimientos próximos</string>
-    <string name="notificacion_titulo">%1$s vence pronto</string>
-    <string name="notificacion_texto">%1$s: vence el %2$s (en %3$d días)</string>
+    <!-- Notification -->
+    <string name="canal_notificaciones_nombre">Lembra reminders</string>
+    <string name="canal_notificaciones_desc">Notifications for upcoming due dates</string>
+    <string name="notificacion_titulo">%1$s is due soon</string>
+    <string name="notificacion_texto">%1$s: due on %2$s (in %3$d days)</string>
 </resources>

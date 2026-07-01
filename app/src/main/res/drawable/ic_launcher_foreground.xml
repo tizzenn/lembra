@@ -4,7 +4,33 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Tarjeta de calendario: cuadrado blanco de esquinas redondeadas -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,74 c-4,0 -7,-3 -7,-7 h14 C61,71 58,74 54,74 z M74,60 v-16 c0,-9.5 -6.2,-17.4 -14.7,-20.1 V22 c0,-3 -2.3,-5.3 -5.3,-5.3 s-5.3,2.3 -5.3,5.3 v1.9 C40.2,26.6 34,34.5 34,44 v16 l-6,6 v3 h52 v-3 L74,60 z" />
+        android:pathData="M36,32h36a6,6 0 0 1 6,6v36a6,6 0 0 1 -6,6h-36a6,6 0 0 1 -6,-6v-36a6,6 0 0 1 6,-6z"/>
+
+    <!-- Cabecera del calendario -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M36,32h36a6,6 0 0 1 6,6v6h-48v-6a6,6 0 0 1 6,-6z"/>
+
+    <!-- Anillas del calendario -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M39,28.5a2.5,2.5 0 0 1 5,0v9a2.5,2.5 0 0 1 -5,0z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M64,28.5a2.5,2.5 0 0 1 5,0v9a2.5,2.5 0 0 1 -5,0z"/>
+
+    <!-- Campana (Material Design) dentro de la tarjeta -->
+    <group
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:translateX="39.6"
+        android:translateY="47.4">
+        <path
+            android:fillColor="#2E7D32"
+            android:pathData="M12,22c1.1,0 2,-0.9 2,-2h-4c0,1.1 0.9,2 2,2zM18,16v-5c0,-3.07 -1.63,-5.64 -4.5,-6.32L13.5,4c0,-0.83 -0.67,-1.5 -1.5,-1.5s-1.5,0.67 -1.5,1.5v0.68C7.64,5.36 6,7.92 6,11v5l-2,2v1h16v-1l-2,-2z"/>
+    </group>
 </vector>
