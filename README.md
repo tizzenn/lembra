@@ -2,6 +2,8 @@
 
 App Android nativa (Kotlin) para gestionar fichas de alertas/recordatorios recurrentes: seguros, ITV, revisiones, vacunas de mascotas, etc.
 
+> Hecha con [Claude Code](https://claude.com/claude-code) (modelo Claude Fable 5, familia Claude 5 de Anthropic).
+
 ## Funcionalidad
 
 - Fichas con: título, categoría, fecha de inicio, cada cuánto se repite, número de repeticiones y días de aviso previo (editable).
