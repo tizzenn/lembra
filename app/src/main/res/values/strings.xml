@@ -35,6 +35,9 @@
     <string name="dialogo_eliminar_titulo">Delete card</string>
     <string name="dialogo_eliminar_mensaje">Are you sure you want to delete this card? Its reminders will be cancelled.</string>
     <string name="cancelar">Cancel</string>
+    <string name="campo_calendario">Add to phone calendar</string>
+    <string name="error_sin_calendarios">No writable calendar found on this device</string>
+    <string name="permiso_calendario_denegado">Calendar permission is needed to add the events</string>
 
     <!-- List card -->
     <string name="proximo_aviso">Next: %1$s</string>

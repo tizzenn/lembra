@@ -1,5 +1,6 @@
 package com.lembra.app.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -11,6 +12,8 @@ import androidx.room.PrimaryKey
  * @param unidadRepeticion unidad de [repetirCada] (días, semanas, meses, años).
  * @param numeroRepeticiones número total de ocurrencias de esta ficha (mínimo 1).
  * @param diasAviso días de antelación con los que se notifica antes de cada ocurrencia.
+ * @param sincronizarCalendario si las ocurrencias se vuelcan al calendario del sistema.
+ * @param calendarioId id del calendario destino (CalendarContract), -1 si ninguno.
  */
 @Entity(tableName = "fichas_alerta")
 data class FichaAlerta(
@@ -22,5 +25,7 @@ data class FichaAlerta(
     val unidadRepeticion: String,
     val numeroRepeticiones: Int,
     val diasAviso: Int,
-    val notas: String = ""
+    val notas: String = "",
+    @ColumnInfo(defaultValue = "0") val sincronizarCalendario: Boolean = false,
+    @ColumnInfo(defaultValue = "-1") val calendarioId: Long = -1L
 )

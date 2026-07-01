@@ -35,6 +35,9 @@
     <string name="dialogo_eliminar_titulo">Eliminar ficha</string>
     <string name="dialogo_eliminar_mensaje">¿Seguro que quieres eliminar esta ficha? Se cancelarán sus avisos.</string>
     <string name="cancelar">Cancelar</string>
+    <string name="campo_calendario">Añadir al calendario del móvil</string>
+    <string name="error_sin_calendarios">No se encontró ningún calendario en el que se pueda escribir</string>
+    <string name="permiso_calendario_denegado">Sin permiso de calendario no se pueden añadir los eventos</string>
 
     <!-- Tarjeta de la lista -->
     <string name="proximo_aviso">Próximo: %1$s</string>

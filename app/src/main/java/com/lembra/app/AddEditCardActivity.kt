@@ -1,12 +1,19 @@
 package com.lembra.app
 
+import android.Manifest
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
+import com.lembra.app.calendario.CalendarioInfo
+import com.lembra.app.calendario.CalendarioSync
 import com.lembra.app.data.AppDatabase
 import com.lembra.app.data.Categoria
 import com.lembra.app.data.FichaAlerta
@@ -14,7 +21,9 @@ import com.lembra.app.data.UnidadRepeticion
 import com.lembra.app.databinding.ActivityAddEditCardBinding
 import com.lembra.app.notification.NotificationScheduler
 import com.lembra.app.ui.crearChipIcono
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.DateFormat
 import java.util.Calendar
 
@@ -28,6 +37,22 @@ class AddEditCardActivity : AppCompatActivity() {
     private var categoriaSeleccionada: Categoria = Categoria.MISC
     private var fechaInicioMillis: Long? = null
     private val formatoFecha = DateFormat.getDateInstance()
+
+    private var calendarios: List<CalendarioInfo> = emptyList()
+    private var calendarioIdPendiente: Long = -1L
+
+    private val permisoCalendario = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { resultados ->
+        if (resultados.values.all { it }) {
+            mostrarSelectorCalendario()
+        } else {
+            binding.switchCalendario.isChecked = false
+            android.widget.Toast.makeText(
+                this, R.string.permiso_calendario_denegado, android.widget.Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +68,7 @@ class AddEditCardActivity : AppCompatActivity() {
         configurarChipsCategoria()
         configurarSpinnerUnidad()
         configurarBotonFecha()
+        configurarCalendario()
 
         binding.botonGuardar.setOnClickListener { guardar() }
         binding.botonEliminar.setOnClickListener { confirmarEliminar() }
@@ -70,6 +96,47 @@ class AddEditCardActivity : AppCompatActivity() {
         binding.spinnerUnidad.adapter = ArrayAdapter(
             this, android.R.layout.simple_spinner_dropdown_item, nombres
         )
+    }
+
+    private fun configurarCalendario() {
+        binding.switchCalendario.setOnCheckedChangeListener { _, activado ->
+            if (activado) {
+                if (tienePermisoCalendario()) {
+                    mostrarSelectorCalendario()
+                } else {
+                    permisoCalendario.launch(
+                        arrayOf(Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR)
+                    )
+                }
+            } else {
+                binding.spinnerCalendario.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun tienePermisoCalendario(): Boolean =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) ==
+            PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) ==
+            PackageManager.PERMISSION_GRANTED
+
+    private fun mostrarSelectorCalendario() {
+        calendarios = CalendarioSync.listarCalendariosEscribibles(this)
+        if (calendarios.isEmpty()) {
+            binding.switchCalendario.isChecked = false
+            android.widget.Toast.makeText(
+                this, R.string.error_sin_calendarios, android.widget.Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        binding.spinnerCalendario.adapter = ArrayAdapter(
+            this, android.R.layout.simple_spinner_dropdown_item, calendarios.map { it.etiqueta() }
+        )
+        val indiceGuardado = calendarios.indexOfFirst { it.id == calendarioIdPendiente }
+        if (indiceGuardado >= 0) {
+            binding.spinnerCalendario.setSelection(indiceGuardado)
+        }
+        binding.spinnerCalendario.visibility = View.VISIBLE
     }
 
     private fun configurarBotonFecha() {
@@ -116,6 +183,9 @@ class AddEditCardActivity : AppCompatActivity() {
 
             val unidad = UnidadRepeticion.fromNombre(ficha.unidadRepeticion)
             binding.spinnerUnidad.setSelection(UnidadRepeticion.entries.indexOf(unidad))
+
+            calendarioIdPendiente = ficha.calendarioId
+            binding.switchCalendario.isChecked = ficha.sincronizarCalendario
         }
     }
 
@@ -137,6 +207,14 @@ class AddEditCardActivity : AppCompatActivity() {
         val unidad = UnidadRepeticion.entries[binding.spinnerUnidad.selectedItemPosition]
         val notas = binding.campoNotas.text?.toString().orEmpty()
 
+        val sincronizar = binding.switchCalendario.isChecked &&
+            calendarios.isNotEmpty() && binding.spinnerCalendario.selectedItemPosition >= 0
+        val calendarioId = if (sincronizar) {
+            calendarios[binding.spinnerCalendario.selectedItemPosition].id
+        } else {
+            -1L
+        }
+
         val ficha = FichaAlerta(
             id = if (fichaId == -1L) 0 else fichaId,
             titulo = titulo,
@@ -146,7 +224,9 @@ class AddEditCardActivity : AppCompatActivity() {
             unidadRepeticion = unidad.name,
             numeroRepeticiones = numeroRepeticiones,
             diasAviso = diasAviso,
-            notas = notas
+            notas = notas,
+            sincronizarCalendario = sincronizar,
+            calendarioId = calendarioId
         )
 
         lifecycleScope.launch {
@@ -157,6 +237,11 @@ class AddEditCardActivity : AppCompatActivity() {
                 ficha.id
             }
             NotificationScheduler.reprogramar(this@AddEditCardActivity, ficha.copy(id = idFinal))
+            if (tienePermisoCalendario()) {
+                withContext(Dispatchers.IO) {
+                    CalendarioSync.sincronizar(this@AddEditCardActivity, ficha.copy(id = idFinal))
+                }
+            }
             finish()
         }
     }
@@ -174,6 +259,11 @@ class AddEditCardActivity : AppCompatActivity() {
         val ficha = fichaExistente ?: return
         lifecycleScope.launch {
             NotificationScheduler.cancelar(this@AddEditCardActivity, ficha)
+            if (tienePermisoCalendario()) {
+                withContext(Dispatchers.IO) {
+                    CalendarioSync.eliminarEventos(this@AddEditCardActivity, ficha.id)
+                }
+            }
             dao.eliminar(ficha)
             finish()
         }
