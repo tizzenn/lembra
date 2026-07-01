@@ -36,7 +36,10 @@ class FichaAdapter(
             val contexto = binding.root.context
 
             binding.textoTitulo.text = ficha.titulo
-            binding.textoCategoria.text = contexto.getString(categoria.nombreRes)
+            binding.iconoCategoria.setImageResource(categoria.iconoRes)
+            binding.iconoCategoria.imageTintList =
+                ContextCompat.getColorStateList(contexto, categoria.colorRes)
+            binding.iconoCategoria.contentDescription = contexto.getString(categoria.nombreRes)
             binding.indicadorCategoria.setBackgroundColor(
                 ContextCompat.getColor(contexto, categoria.colorRes)
             )

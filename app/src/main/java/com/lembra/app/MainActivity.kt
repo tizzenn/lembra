@@ -16,6 +16,7 @@ import com.lembra.app.data.Categoria
 import com.lembra.app.data.FichaAlerta
 import com.lembra.app.databinding.ActivityMainBinding
 import com.lembra.app.ui.FichaAdapter
+import com.lembra.app.ui.crearChipIcono
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -63,11 +64,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configurarFiltros() {
-        val chipTodas = Chip(this).apply {
-            text = getString(R.string.filtro_todas)
-            isCheckable = true
-            isChecked = true
-        }
+        val chipTodas = crearChipIcono(
+            this, R.drawable.ic_cat_todas, R.color.text_secondary, getString(R.string.filtro_todas)
+        ).apply { isChecked = true }
         binding.chipGroupFiltro.addView(chipTodas)
         chipTodas.setOnClickListener {
             categoriaSeleccionada = null
@@ -75,10 +74,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         Categoria.entries.forEach { categoria ->
-            val chip = Chip(this).apply {
-                text = getString(categoria.nombreRes)
-                isCheckable = true
-            }
+            val chip = crearChipIcono(
+                this, categoria.iconoRes, categoria.colorRes, getString(categoria.nombreRes)
+            )
             binding.chipGroupFiltro.addView(chip)
             chip.setOnClickListener {
                 categoriaSeleccionada = categoria

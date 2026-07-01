@@ -1,0 +1,86 @@
+name: Publicar en F-Droid
+
+on:
+  push:
+    tags: [ "v*" ]
+
+permissions:
+  contents: write
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v7
+
+      - name: Configurar JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Instalar build-tools (apksigner para fdroidserver)
+        run: sdkmanager "build-tools;34.0.0"
+
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: 8.7
+
+      - name: Restaurar clave de firma
+        run: echo "${{ secrets.LEMBRA_KEYSTORE_B64 }}" | base64 -d > "$RUNNER_TEMP/lembra-app.p12"
+
+      - name: Compilar APK firmado
+        env:
+          LEMBRA_KEYSTORE: ${{ runner.temp }}/lembra-app.p12
+          LEMBRA_KEYSTORE_PASS: ${{ secrets.LEMBRA_KEYSTORE_PASS }}
+        run: gradle assembleRelease --no-daemon
+
+      - name: Descargar repositorio fdroid
+        uses: actions/checkout@v7
+        with:
+          repository: tizzenn/fdroid
+          ssh-key: ${{ secrets.FDROID_DEPLOY_KEY }}
+          path: fdroid
+
+      - name: Instalar fdroidserver
+        run: pipx install fdroidserver
+
+      - name: Actualizar índice F-Droid y publicar
+        env:
+          FDROID_KEYSTORE_B64: ${{ secrets.FDROID_KEYSTORE_B64 }}
+          FDROID_KEYSTORE_PASS: ${{ secrets.FDROID_KEYSTORE_PASS }}
+        run: |
+          cd fdroid
+          echo "$FDROID_KEYSTORE_B64" | base64 -d > keystore.p12
+          cat > config.yml <<EOF
+          repo_url: https://tizzenn.github.io/fdroid/repo
+          repo_name: Repositorio de tizzenn
+          repo_description: Apps publicadas por tizzenn
+          archive_older: 0
+          repo_keyalias: repokey
+          keystore: keystore.p12
+          keystorepass: $FDROID_KEYSTORE_PASS
+          keypass: $FDROID_KEYSTORE_PASS
+          EOF
+          mkdir -p repo
+          cp ../app/build/outputs/apk/release/app-release.apk "repo/lembra-$GITHUB_REF_NAME.apk"
+          fdroid update --create-metadata --pretty
+          rm -f config.yml keystore.p12
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Publicar Lembra $GITHUB_REF_NAME"
+          git push
+
+      - name: Crear release en GitHub con el APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp app/build/outputs/apk/release/app-release.apk "lembra-$GITHUB_REF_NAME.apk"
+          gh release create "$GITHUB_REF_NAME" "lembra-$GITHUB_REF_NAME.apk" \
+            --title "Lembra $GITHUB_REF_NAME" --generate-notes

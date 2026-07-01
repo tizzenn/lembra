@@ -37,14 +37,13 @@
                 android:textStyle="bold"
                 tools:text="Seguro del coche" />
 
-            <TextView
-                android:id="@+id/textoCategoria"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp"
-                tools:text="Coche" />
+            <ImageView
+                android:id="@+id/iconoCategoria"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="4dp"
+                app:tint="@color/cat_misc"
+                tools:src="@drawable/ic_cat_coche" />
 
             <TextView
                 android:id="@+id/textoProximoAviso"

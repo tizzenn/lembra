@@ -13,6 +13,7 @@ import com.lembra.app.data.FichaAlerta
 import com.lembra.app.data.UnidadRepeticion
 import com.lembra.app.databinding.ActivityAddEditCardBinding
 import com.lembra.app.notification.NotificationScheduler
+import com.lembra.app.ui.crearChipIcono
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -55,9 +56,9 @@ class AddEditCardActivity : AppCompatActivity() {
 
     private fun configurarChipsCategoria() {
         Categoria.entries.forEach { categoria ->
-            val chip = Chip(this).apply {
-                text = getString(categoria.nombreRes)
-                isCheckable = true
+            val chip = crearChipIcono(
+                this, categoria.iconoRes, categoria.colorRes, getString(categoria.nombreRes)
+            ).apply {
                 isChecked = categoria == categoriaSeleccionada
             }
             chip.setOnClickListener { categoriaSeleccionada = categoria }

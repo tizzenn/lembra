@@ -12,14 +12,31 @@ android {
         applicationId = "com.lembra.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
+    }
+
+    // La clave de firma llega por variables de entorno (en CI, desde los secrets del repo).
+    signingConfigs {
+        create("release") {
+            val rutaKeystore = System.getenv("LEMBRA_KEYSTORE")
+            if (rutaKeystore != null) {
+                storeFile = file(rutaKeystore)
+                storeType = "PKCS12"
+                storePassword = System.getenv("LEMBRA_KEYSTORE_PASS")
+                keyAlias = System.getenv("LEMBRA_KEY_ALIAS") ?: "lembra"
+                keyPassword = System.getenv("LEMBRA_KEY_PASS") ?: System.getenv("LEMBRA_KEYSTORE_PASS")
+            }
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            if (System.getenv("LEMBRA_KEYSTORE") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
