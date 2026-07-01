@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.Lembra" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/lembra_primary</item>
+        <item name="colorPrimaryDark">@color/lembra_primary_dark</item>
+        <item name="colorAccent">@color/lembra_accent</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+</resources>
