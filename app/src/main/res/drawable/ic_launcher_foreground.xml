@@ -5,9 +5,9 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Tarjeta de calendario: cuadrado blanco de esquinas redondeadas -->
+    <!-- Tarjeta de calendario: cuadrado negro de esquinas redondeadas -->
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="#1A1A1A"
         android:pathData="M36,32h36a6,6 0 0 1 6,6v36a6,6 0 0 1 -6,6h-36a6,6 0 0 1 -6,-6v-36a6,6 0 0 1 6,-6z"/>
 
     <!-- Cabecera del calendario en rojo corporativo -->
@@ -17,10 +17,10 @@
 
     <!-- Anillas del calendario -->
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="#1A1A1A"
         android:pathData="M39,28.5a2.5,2.5 0 0 1 5,0v9a2.5,2.5 0 0 1 -5,0z"/>
     <path
-        android:fillColor="#FFFFFF"
+        android:fillColor="#1A1A1A"
         android:pathData="M64,28.5a2.5,2.5 0 0 1 5,0v9a2.5,2.5 0 0 1 -5,0z"/>
 
     <!-- Flechas circulares (autorenew, Material Design): lo recurrente -->
