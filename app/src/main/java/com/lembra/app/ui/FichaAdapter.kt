@@ -17,6 +17,8 @@ class FichaAdapter(
 ) : ListAdapter<FichaAlerta, FichaAdapter.FichaViewHolder>(DIFF_CALLBACK) {
 
     private val formatoFecha = DateFormat.getDateInstance()
+    private val formatoFechaHora =
+        DateFormat.getDateTimeInstance(DateFormat.DEFAULT, DateFormat.SHORT)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FichaViewHolder {
         val binding = ItemFichaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -46,8 +48,10 @@ class FichaAdapter(
             val proxima = CalculadoraOcurrencias.proximaOcurrencia(ficha)
             if (proxima != null) {
                 val (fecha, restantes) = proxima
+                // Con hora elegida se muestra también la hora; si no, solo la fecha.
+                val formato = if (ficha.horaMinutos >= 0) formatoFechaHora else formatoFecha
                 binding.textoProximoAviso.text =
-                    contexto.getString(com.lembra.app.R.string.proximo_aviso, formatoFecha.format(fecha))
+                    contexto.getString(com.lembra.app.R.string.proximo_aviso, formato.format(fecha))
                 binding.textoRepeticiones.text = contexto.getString(
                     com.lembra.app.R.string.repeticiones_restantes, restantes, ficha.numeroRepeticiones
                 )

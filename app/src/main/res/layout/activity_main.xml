@@ -6,23 +6,35 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/lembra_primary"
+                android:background="?attr/colorPrimary"
                 android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
                 app:title="@string/titulo_lista"
                 app:titleTextColor="@android:color/white" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroupFiltro"
+            <!-- Los filtros caben todos gracias al desplazamiento horizontal -->
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:singleSelection="true" />
+                android:background="@color/background"
+                android:scrollbars="none">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroupFiltro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="6dp"
+                    app:singleLine="true"
+                    app:singleSelection="true" />
+            </HorizontalScrollView>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -52,8 +64,8 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="24dp"
             android:contentDescription="@string/titulo_nueva_ficha"
-            android:src="@android:drawable/ic_input_add"
-            app:backgroundTint="@color/lembra_accent"
+            android:src="@drawable/ic_agregar"
+            app:backgroundTint="?attr/colorSecondary"
             app:tint="@android:color/white" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

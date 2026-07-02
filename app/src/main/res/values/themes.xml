@@ -3,7 +3,105 @@
     <style name="Theme.Lembra" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/lembra_primary</item>
         <item name="colorPrimaryDark">@color/lembra_primary_dark</item>
+        <item name="colorPrimaryVariant">@color/lembra_primary_dark</item>
         <item name="colorAccent">@color/lembra_accent</item>
+        <item name="colorSecondary">@color/lembra_accent</item>
+        <item name="colorSecondaryVariant">@color/lembra_accent</item>
         <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <!-- Cabecera de sección de los formularios -->
+    <style name="Lembra.TextoSeccion" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Overlays de color elegibles en Ajustes. BaseActivity aplica
+         uno de "principal" y uno de "acento" según las preferencias.
+         ════════════════════════════════════════════════════════════ -->
+
+    <style name="Overlay.Lembra.Primario.Negro" parent="">
+        <item name="colorPrimary">@color/paleta_negro</item>
+        <item name="colorPrimaryDark">@color/paleta_negro_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_negro_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Rojo" parent="">
+        <item name="colorPrimary">@color/paleta_rojo</item>
+        <item name="colorPrimaryDark">@color/paleta_rojo_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_rojo_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Azul" parent="">
+        <item name="colorPrimary">@color/paleta_azul</item>
+        <item name="colorPrimaryDark">@color/paleta_azul_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_azul_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Verde" parent="">
+        <item name="colorPrimary">@color/paleta_verde</item>
+        <item name="colorPrimaryDark">@color/paleta_verde_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_verde_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Morado" parent="">
+        <item name="colorPrimary">@color/paleta_morado</item>
+        <item name="colorPrimaryDark">@color/paleta_morado_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_morado_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Teal" parent="">
+        <item name="colorPrimary">@color/paleta_teal</item>
+        <item name="colorPrimaryDark">@color/paleta_teal_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_teal_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Naranja" parent="">
+        <item name="colorPrimary">@color/paleta_naranja</item>
+        <item name="colorPrimaryDark">@color/paleta_naranja_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_naranja_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Primario.Rosa" parent="">
+        <item name="colorPrimary">@color/paleta_rosa</item>
+        <item name="colorPrimaryDark">@color/paleta_rosa_oscuro</item>
+        <item name="colorPrimaryVariant">@color/paleta_rosa_oscuro</item>
+    </style>
+
+    <style name="Overlay.Lembra.Acento.Negro" parent="">
+        <item name="colorAccent">@color/paleta_negro</item>
+        <item name="colorSecondary">@color/paleta_negro</item>
+        <item name="colorSecondaryVariant">@color/paleta_negro_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Rojo" parent="">
+        <item name="colorAccent">@color/paleta_rojo</item>
+        <item name="colorSecondary">@color/paleta_rojo</item>
+        <item name="colorSecondaryVariant">@color/paleta_rojo_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Azul" parent="">
+        <item name="colorAccent">@color/paleta_azul</item>
+        <item name="colorSecondary">@color/paleta_azul</item>
+        <item name="colorSecondaryVariant">@color/paleta_azul_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Verde" parent="">
+        <item name="colorAccent">@color/paleta_verde</item>
+        <item name="colorSecondary">@color/paleta_verde</item>
+        <item name="colorSecondaryVariant">@color/paleta_verde_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Morado" parent="">
+        <item name="colorAccent">@color/paleta_morado</item>
+        <item name="colorSecondary">@color/paleta_morado</item>
+        <item name="colorSecondaryVariant">@color/paleta_morado_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Teal" parent="">
+        <item name="colorAccent">@color/paleta_teal</item>
+        <item name="colorSecondary">@color/paleta_teal</item>
+        <item name="colorSecondaryVariant">@color/paleta_teal_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Naranja" parent="">
+        <item name="colorAccent">@color/paleta_naranja</item>
+        <item name="colorSecondary">@color/paleta_naranja</item>
+        <item name="colorSecondaryVariant">@color/paleta_naranja_oscuro</item>
+    </style>
+    <style name="Overlay.Lembra.Acento.Rosa" parent="">
+        <item name="colorAccent">@color/paleta_rosa</item>
+        <item name="colorSecondary">@color/paleta_rosa</item>
+        <item name="colorSecondaryVariant">@color/paleta_rosa_oscuro</item>
     </style>
 </resources>

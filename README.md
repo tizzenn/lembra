@@ -6,14 +6,18 @@ App Android nativa (Kotlin) para gestionar fichas de alertas/recordatorios recur
 
 ## Funcionalidad
 
-- Fichas con: título, categoría, fecha de inicio, cada cuánto se repite, número de repeticiones y días de aviso previo (editable).
+- Fichas con: título, categoría, fecha de inicio, hora y ubicación opcionales,
+  cada cuánto se repite, número de repeticiones y días de aviso previo (editable).
 - Notificación local automática X días antes de **cada** ocurrencia (no solo la última).
 - Fichas editables y eliminables (al eliminar/editar se cancelan y reprograman los avisos).
-- Categorías: Coche, Moto, Casa, Mascotas, Varios — con filtro en la lista principal.
+- Categorías: Coche, Moto, Casa, Mascotas, Niños, Documentación, Licencias y
+  Varios — con filtro en la lista principal.
+- Ajustes: tema blanco/negro/sistema y colores principal y de acento elegibles
+  (por defecto los corporativos: negro y rojo).
 - Las alarmas sobreviven a un reinicio del móvil.
 - Opcional por ficha: volcar todas las ocurrencias como eventos al calendario
-  del móvil (eliges en cuál), con recordatorio propio. Al editar o borrar la
-  ficha, sus eventos se regeneran o eliminan automáticamente.
+  del móvil (eliges en cuál), con recordatorio propio y ubicación. Al editar o
+  borrar la ficha, sus eventos se regeneran o eliminan automáticamente.
 
 ## Instalación y actualizaciones vía F-Droid (recomendado)
 

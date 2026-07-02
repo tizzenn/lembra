@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="lembra_primary">#2E7D32</color>
-    <color name="lembra_primary_dark">#1B5E20</color>
-    <color name="lembra_accent">#FF7043</color>
+    <!-- Colores corporativos por defecto: negro (principal) y rojo (acento).
+         El usuario puede cambiarlos desde Ajustes; ver PaletaColor y themes.xml. -->
+    <color name="lembra_primary">@color/paleta_negro</color>
+    <color name="lembra_primary_dark">@color/paleta_negro_oscuro</color>
+    <color name="lembra_accent">@color/paleta_rojo</color>
+
+    <!-- Superficies y textos; tienen variante nocturna en values-night. -->
     <color name="background">#F5F5F5</color>
     <color name="card_background">#FFFFFF</color>
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
     <color name="alerta_urgente">#D32F2F</color>
 
+    <!-- Paleta elegible en Ajustes (cada color con su variante oscura para la barra de estado) -->
+    <color name="paleta_negro">#1A1A1A</color>
+    <color name="paleta_negro_oscuro">#000000</color>
+    <color name="paleta_rojo">#E53935</color>
+    <color name="paleta_rojo_oscuro">#B71C1C</color>
+    <color name="paleta_azul">#1976D2</color>
+    <color name="paleta_azul_oscuro">#0D47A1</color>
+    <color name="paleta_verde">#2E7D32</color>
+    <color name="paleta_verde_oscuro">#1B5E20</color>
+    <color name="paleta_morado">#7B1FA2</color>
+    <color name="paleta_morado_oscuro">#4A148C</color>
+    <color name="paleta_teal">#00897B</color>
+    <color name="paleta_teal_oscuro">#00695C</color>
+    <color name="paleta_naranja">#F57C00</color>
+    <color name="paleta_naranja_oscuro">#E65100</color>
+    <color name="paleta_rosa">#D81B60</color>
+    <color name="paleta_rosa_oscuro">#880E4F</color>
+
+    <!-- Colores de categoría -->
     <color name="cat_coche">#1976D2</color>
     <color name="cat_moto">#7B1FA2</color>
     <color name="cat_casa">#F57C00</color>
     <color name="cat_mascotas">#00897B</color>
+    <color name="cat_ninos">#D81B60</color>
+    <color name="cat_documentacion">#3949AB</color>
+    <color name="cat_licencias">#00838F</color>
     <color name="cat_misc">#616161</color>
 </resources>

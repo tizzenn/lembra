@@ -6,6 +6,20 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 
+/** Chip con círculo de color e identificado por su nombre; para elegir colores en Ajustes. */
+fun crearChipColor(
+    context: Context,
+    @ColorRes colorRes: Int,
+    nombre: String
+): Chip = Chip(context).apply {
+    text = nombre
+    isCheckable = true
+    isCheckedIconVisible = false
+    setChipIconResource(com.lembra.app.R.drawable.ic_circulo)
+    isChipIconVisible = true
+    chipIconTint = ContextCompat.getColorStateList(context, colorRes)
+}
+
 /** Crea un chip solo con icono (sin texto); el nombre queda como contentDescription. */
 fun crearChipIcono(
     context: Context,

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Variantes nocturnas de superficies y textos (tema "Negro" de Ajustes). -->
+    <color name="background">#121212</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="text_primary">#ECECEC</color>
+    <color name="text_secondary">#ABABAB</color>
+    <color name="alerta_urgente">#EF5350</color>
+</resources>

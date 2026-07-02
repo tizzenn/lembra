@@ -66,6 +66,9 @@ object CalendarioSync {
                 if (ficha.notas.isNotBlank()) {
                     put(CalendarContract.Events.DESCRIPTION, ficha.notas)
                 }
+                if (ficha.ubicacion.isNotBlank()) {
+                    put(CalendarContract.Events.EVENT_LOCATION, ficha.ubicacion)
+                }
                 put(CalendarContract.Events.DTSTART, fechaOcurrencia)
                 put(CalendarContract.Events.DTEND, fechaOcurrencia + UNA_HORA_MILLIS)
                 put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().id)

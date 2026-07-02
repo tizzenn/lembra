@@ -5,12 +5,16 @@
     <string name="titulo_lista">Mis alertas</string>
     <string name="sin_fichas">No tienes fichas todavía.\nToca + para crear la primera.</string>
     <string name="filtro_todas">Todas</string>
+    <string name="accion_ajustes">Ajustes</string>
 
     <!-- Categorías -->
     <string name="cat_coche">Coche</string>
     <string name="cat_moto">Moto</string>
     <string name="cat_casa">Casa</string>
     <string name="cat_mascotas">Mascotas</string>
+    <string name="cat_ninos">Niños</string>
+    <string name="cat_documentacion">Documentación</string>
+    <string name="cat_licencias">Licencias</string>
     <string name="cat_misc">Varios</string>
 
     <!-- Formulario -->
@@ -19,25 +23,51 @@
     <string name="campo_titulo">Título</string>
     <string name="campo_categoria">Categoría</string>
     <string name="campo_fecha_inicio">Fecha de inicio</string>
+    <string name="campo_hora">Hora (opcional)</string>
+    <string name="campo_ubicacion">Ubicación (opcional)</string>
     <string name="campo_repetir_cada">Repetir cada</string>
+    <string name="campo_unidad">Unidad</string>
     <string name="campo_repetir_veces">Número de repeticiones</string>
     <string name="campo_dias_aviso">Avisar con antelación (días)</string>
     <string name="campo_notas">Notas (opcional)</string>
+    <string name="seccion_cuando">Cuándo</string>
+    <string name="seccion_repeticion">Repetición</string>
+    <string name="seccion_detalles">Detalles</string>
+    <string name="seccion_calendario">Calendario del sistema</string>
     <string name="unidad_dias">Días</string>
     <string name="unidad_semanas">Semanas</string>
     <string name="unidad_meses">Meses</string>
     <string name="unidad_anios">Años</string>
     <string name="boton_guardar">Guardar</string>
     <string name="boton_eliminar">Eliminar</string>
-    <string name="boton_seleccionar_fecha">Seleccionar fecha</string>
+    <string name="boton_quitar_hora">Sin hora</string>
     <string name="error_titulo_vacio">Ponle un título a la ficha</string>
     <string name="error_fecha_vacia">Selecciona una fecha de inicio</string>
     <string name="dialogo_eliminar_titulo">Eliminar ficha</string>
     <string name="dialogo_eliminar_mensaje">¿Seguro que quieres eliminar esta ficha? Se cancelarán sus avisos.</string>
     <string name="cancelar">Cancelar</string>
     <string name="campo_calendario">Añadir al calendario del móvil</string>
+    <string name="campo_calendario_ayuda">Crea un evento en el calendario que elijas por cada repetición, con su propio aviso. Si está apagado, solo avisa la propia Lembra.</string>
+    <string name="campo_calendario_destino">Calendario de destino</string>
     <string name="error_sin_calendarios">No se encontró ningún calendario en el que se pueda escribir</string>
     <string name="permiso_calendario_denegado">Sin permiso de calendario no se pueden añadir los eventos</string>
+
+    <!-- Ajustes -->
+    <string name="titulo_ajustes">Ajustes</string>
+    <string name="ajustes_tema">Tema</string>
+    <string name="tema_blanco">Blanco</string>
+    <string name="tema_negro">Negro</string>
+    <string name="tema_sistema">Sistema</string>
+    <string name="ajustes_color_principal">Color principal</string>
+    <string name="ajustes_color_acento">Color de acento</string>
+    <string name="color_negro">Negro</string>
+    <string name="color_rojo">Rojo</string>
+    <string name="color_azul">Azul</string>
+    <string name="color_verde">Verde</string>
+    <string name="color_morado">Morado</string>
+    <string name="color_teal">Verde azulado</string>
+    <string name="color_naranja">Naranja</string>
+    <string name="color_rosa">Rosa</string>
 
     <!-- Tarjeta de la lista -->
     <string name="proximo_aviso">Próximo: %1$s</string>

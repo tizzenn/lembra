@@ -5,12 +5,16 @@
     <string name="titulo_lista">My alerts</string>
     <string name="sin_fichas">No cards yet.\nTap + to create your first one.</string>
     <string name="filtro_todas">All</string>
+    <string name="accion_ajustes">Settings</string>
 
     <!-- Categories -->
     <string name="cat_coche">Car</string>
     <string name="cat_moto">Motorbike</string>
     <string name="cat_casa">Home</string>
     <string name="cat_mascotas">Pets</string>
+    <string name="cat_ninos">Kids</string>
+    <string name="cat_documentacion">Documents</string>
+    <string name="cat_licencias">Licences</string>
     <string name="cat_misc">Other</string>
 
     <!-- Form -->
@@ -19,25 +23,51 @@
     <string name="campo_titulo">Title</string>
     <string name="campo_categoria">Category</string>
     <string name="campo_fecha_inicio">Start date</string>
+    <string name="campo_hora">Time (optional)</string>
+    <string name="campo_ubicacion">Location (optional)</string>
     <string name="campo_repetir_cada">Repeat every</string>
+    <string name="campo_unidad">Unit</string>
     <string name="campo_repetir_veces">Number of repetitions</string>
     <string name="campo_dias_aviso">Notify in advance (days)</string>
     <string name="campo_notas">Notes (optional)</string>
+    <string name="seccion_cuando">When</string>
+    <string name="seccion_repeticion">Repetition</string>
+    <string name="seccion_detalles">Details</string>
+    <string name="seccion_calendario">System calendar</string>
     <string name="unidad_dias">Days</string>
     <string name="unidad_semanas">Weeks</string>
     <string name="unidad_meses">Months</string>
     <string name="unidad_anios">Years</string>
     <string name="boton_guardar">Save</string>
     <string name="boton_eliminar">Delete</string>
-    <string name="boton_seleccionar_fecha">Pick a date</string>
+    <string name="boton_quitar_hora">No time</string>
     <string name="error_titulo_vacio">Give the card a title</string>
     <string name="error_fecha_vacia">Select a start date</string>
     <string name="dialogo_eliminar_titulo">Delete card</string>
     <string name="dialogo_eliminar_mensaje">Are you sure you want to delete this card? Its reminders will be cancelled.</string>
     <string name="cancelar">Cancel</string>
     <string name="campo_calendario">Add to phone calendar</string>
+    <string name="campo_calendario_ayuda">Creates an event in the calendar you choose for each repetition, with its own reminder. If off, Lembra only notifies you itself.</string>
+    <string name="campo_calendario_destino">Target calendar</string>
     <string name="error_sin_calendarios">No writable calendar found on this device</string>
     <string name="permiso_calendario_denegado">Calendar permission is needed to add the events</string>
+
+    <!-- Settings -->
+    <string name="titulo_ajustes">Settings</string>
+    <string name="ajustes_tema">Theme</string>
+    <string name="tema_blanco">Light</string>
+    <string name="tema_negro">Dark</string>
+    <string name="tema_sistema">System</string>
+    <string name="ajustes_color_principal">Primary color</string>
+    <string name="ajustes_color_acento">Accent color</string>
+    <string name="color_negro">Black</string>
+    <string name="color_rojo">Red</string>
+    <string name="color_azul">Blue</string>
+    <string name="color_verde">Green</string>
+    <string name="color_morado">Purple</string>
+    <string name="color_teal">Teal</string>
+    <string name="color_naranja">Orange</string>
+    <string name="color_rosa">Pink</string>
 
     <!-- List card -->
     <string name="proximo_aviso">Next: %1$s</string>
