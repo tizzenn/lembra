@@ -1,4 +1,4 @@
-name: Publicar en F-Droid
+﻿name: Publicar en F-Droid
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   publicar:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar código
+      - name: Descargar cÃ³digo
         uses: actions/checkout@v7
 
       - name: Configurar JDK 17
@@ -50,7 +50,7 @@ jobs:
       - name: Instalar fdroidserver
         run: pipx install fdroidserver
 
-      - name: Actualizar índice F-Droid y publicar
+      - name: Actualizar Ã­ndice F-Droid y publicar
         env:
           FDROID_KEYSTORE_B64: ${{ secrets.FDROID_KEYSTORE_B64 }}
           FDROID_KEYSTORE_PASS: ${{ secrets.FDROID_KEYSTORE_PASS }}
@@ -75,7 +75,11 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Publicar Lembra $GITHUB_REF_NAME"
-          git push
+          # Reintentos con rebase por si otra release publico a la vez
+          for intento in 1 2 3; do
+            git push && break
+            git pull --rebase
+          done
 
       - name: Crear release en GitHub con el APK
         env:
