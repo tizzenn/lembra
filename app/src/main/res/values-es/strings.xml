@@ -60,6 +60,15 @@
     <string name="tema_sistema">Sistema</string>
     <string name="ajustes_color_principal">Color principal</string>
     <string name="ajustes_color_acento">Color de acento</string>
+    <string name="ajustes_orden_categorias">Orden de categorías</string>
+    <string name="ajustes_respaldo">Copia de seguridad</string>
+    <string name="accion_exportar">Exportar</string>
+    <string name="accion_importar">Importar</string>
+    <string name="orden_subir">Subir</string>
+    <string name="orden_bajar">Bajar</string>
+    <string name="respaldo_exportado">Copia guardada.</string>
+    <string name="respaldo_importado">%1$d fichas importadas.</string>
+    <string name="respaldo_error">No se pudo leer ese archivo.</string>
     <string name="color_negro">Negro</string>
     <string name="color_rojo">Rojo</string>
     <string name="color_azul">Azul</string>

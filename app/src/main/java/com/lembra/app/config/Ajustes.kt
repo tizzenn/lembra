@@ -91,4 +91,24 @@ object Ajustes {
     /** Huella de los colores elegidos, para detectar cambios y recrear actividades. */
     fun firmaColores(context: Context): String =
         "${colorPrimario(context).name}/${colorAcento(context).name}"
+
+    // ── Orden de las pestañas de categorías ───────────────────────
+
+    private const val CLAVE_ORDEN_CATEGORIAS = "orden_categorias"
+
+    fun ordenCategorias(context: Context): List<com.lembra.app.data.Categoria> {
+        val guardado = prefs(context).getString(CLAVE_ORDEN_CATEGORIAS, null)
+        val nombres = guardado?.split(",").orEmpty()
+        val ordenadas = nombres.mapNotNull { nombre ->
+            com.lembra.app.data.Categoria.entries.firstOrNull { it.name == nombre }
+        }
+        // Las categorías que no estén en la preferencia (nuevas) van al final
+        return ordenadas + com.lembra.app.data.Categoria.entries.filter { !ordenadas.contains(it) }
+    }
+
+    fun guardarOrdenCategorias(context: Context, orden: List<com.lembra.app.data.Categoria>) {
+        prefs(context).edit()
+            .putString(CLAVE_ORDEN_CATEGORIAS, orden.joinToString(",") { it.name })
+            .apply()
+    }
 }

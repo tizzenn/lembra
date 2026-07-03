@@ -60,6 +60,15 @@
     <string name="tema_sistema">System</string>
     <string name="ajustes_color_principal">Primary color</string>
     <string name="ajustes_color_acento">Accent color</string>
+    <string name="ajustes_orden_categorias">Category order</string>
+    <string name="ajustes_respaldo">Backup</string>
+    <string name="accion_exportar">Export</string>
+    <string name="accion_importar">Import</string>
+    <string name="orden_subir">Move up</string>
+    <string name="orden_bajar">Move down</string>
+    <string name="respaldo_exportado">Backup saved.</string>
+    <string name="respaldo_importado">%1$d cards imported.</string>
+    <string name="respaldo_error">Could not read that file.</string>
     <string name="color_negro">Black</string>
     <string name="color_rojo">Red</string>
     <string name="color_azul">Blue</string>

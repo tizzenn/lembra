@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
+import com.lembra.app.config.Ajustes
 import com.lembra.app.data.AppDatabase
 import com.lembra.app.data.Categoria
 import com.lembra.app.data.FichaAlerta
@@ -48,8 +49,6 @@ class MainActivity : BaseActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
-        configurarFiltros()
-
         binding.fabAgregar.setOnClickListener {
             startActivity(Intent(this, AddEditCardActivity::class.java))
         }
@@ -77,20 +76,27 @@ class MainActivity : BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Se reconstruyen por si el orden cambió en Ajustes
+        configurarFiltros()
+    }
+
     private fun configurarFiltros() {
+        binding.chipGroupFiltro.removeAllViews()
         val chipTodas = crearChipIcono(
             this, R.drawable.ic_cat_todas, R.color.text_secondary, getString(R.string.filtro_todas)
-        ).apply { isChecked = true }
+        ).apply { isChecked = categoriaSeleccionada == null }
         binding.chipGroupFiltro.addView(chipTodas)
         chipTodas.setOnClickListener {
             categoriaSeleccionada = null
             aplicarFiltro()
         }
 
-        Categoria.entries.forEach { categoria ->
+        Ajustes.ordenCategorias(this).forEach { categoria ->
             val chip = crearChipIcono(
                 this, categoria.iconoRes, categoria.colorRes, getString(categoria.nombreRes)
-            )
+            ).apply { isChecked = categoriaSeleccionada == categoria }
             binding.chipGroupFiltro.addView(chip)
             chip.setOnClickListener {
                 categoriaSeleccionada = categoria
