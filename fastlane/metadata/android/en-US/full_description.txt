@@ -1,0 +1,19 @@
+Lembra is a native, fully offline app to manage cards for recurring alerts and
+reminders: car and motorbike paperwork, home tasks, pet vaccinations, kids'
+appointments, documents, licenses and more.
+
+Features:
+
+* Cards with title, category, start date, optional time and location, repeat
+  interval, number of repetitions and how many days in advance to warn you.
+* A local notification is fired automatically the chosen number of days before
+  EACH occurrence, not only the last one.
+* Editable and deletable cards; alerts are cancelled and rescheduled on change.
+* Categories with filtering: Car, Motorbike, Home, Pets, Kids, Documents,
+  Licenses and Misc.
+* Light/dark/system theme and configurable primary and accent colors.
+* Alarms survive a device reboot.
+* Optionally dump every occurrence as events into your device calendar.
+
+No account, no backend and no internet access: everything is stored locally
+with Room.

@@ -1,0 +1,20 @@
+Lembra es una app nativa y totalmente sin conexión para gestionar fichas de
+alertas y recordatorios recurrentes: papeleo del coche y la moto, tareas de
+casa, vacunas de mascotas, citas de los niños, documentación, licencias y más.
+
+Funcionalidad:
+
+* Fichas con título, categoría, fecha de inicio, hora y ubicación opcionales,
+  cada cuánto se repite, número de repeticiones y días de aviso previo.
+* La notificación local salta automáticamente los días elegidos antes de CADA
+  ocurrencia, no solo la última.
+* Fichas editables y eliminables; los avisos se cancelan y reprograman al
+  cambiarlas.
+* Categorías con filtro: Coche, Moto, Casa, Mascotas, Niños, Documentación,
+  Licencias y Varios.
+* Tema claro/oscuro/sistema y colores principal y de acento configurables.
+* Las alarmas sobreviven a un reinicio del móvil.
+* Opcionalmente vuelca cada ocurrencia como evento en el calendario del móvil.
+
+Sin cuenta, sin servidor y sin acceso a internet: todo se guarda en local con
+Room.

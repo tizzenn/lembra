@@ -12,8 +12,8 @@ android {
         applicationId = "com.lembra.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 11
-        versionName = "1.10"
+        versionCode = 12
+        versionName = "1.11"
     }
 
     // La clave de firma llega por variables de entorno (en CI, desde los secrets del repo).
