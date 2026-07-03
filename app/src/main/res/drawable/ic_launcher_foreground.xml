@@ -5,23 +5,24 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Calendario (calendar_today, Material Design) en rojo claro sobre negro -->
+    <!-- Calendario (calendar_today, Material Design) en rojo claro sobre negro.
+         Símbolo de 48px centrado: margen de 30px por lado, a juego con Bote. -->
     <group
-        android:scaleX="2.4"
-        android:scaleY="2.4"
-        android:translateX="25.2"
-        android:translateY="25.2">
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:translateX="30"
+        android:translateY="30">
         <path
             android:fillColor="#EF5350"
             android:pathData="M20,3h-1V1h-2v2H7V1H5v2H4c-1.1,0 -2,0.9 -2,2v16c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2V5c0,-1.1 -0.9,-2 -2,-2zM20,21H4V8h16V21z"/>
     </group>
 
-    <!-- Flechas circulares (autorenew, Material Design), mismo rojo -->
+    <!-- Flechas circulares (autorenew), reescaladas en proporción y centradas. -->
     <group
-        android:scaleX="1.15"
-        android:scaleY="1.15"
-        android:translateX="40.2"
-        android:translateY="46.4">
+        android:scaleX="0.958"
+        android:scaleY="0.958"
+        android:translateX="42.5"
+        android:translateY="47.67">
         <path
             android:fillColor="#EF5350"
             android:pathData="M12,6v3l4,-4l-4,-4v3c-4.42,0 -8,3.58 -8,8c0,1.57 0.46,3.03 1.24,4.26L6.7,14.8c-0.45,-0.83 -0.7,-1.79 -0.7,-2.8c0,-3.31 2.69,-6 6,-6zM18.76,7.74L17.3,9.2c0.44,0.84 0.7,1.79 0.7,2.8c0,3.31 -2.69,6 -6,6v-3l-4,4l4,4v-3c4.42,0 8,-3.58 8,-8c0,-1.57 -0.46,-3.03 -1.24,-4.26z"/>
