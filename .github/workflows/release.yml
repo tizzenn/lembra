@@ -1,4 +1,4 @@
-﻿name: Publicar en F-Droid
+name: Publicar en F-Droid
 
 on:
   push:
@@ -7,11 +7,16 @@ on:
 permissions:
   contents: write
 
+# Serializa las publicaciones de esta app (no cancela, encola).
+concurrency:
+  group: publicar-fdroid
+  cancel-in-progress: false
+
 jobs:
   publicar:
     runs-on: ubuntu-latest
     steps:
-      - name: Descargar cÃ³digo
+      - name: Descargar codigo
         uses: actions/checkout@v7
 
       - name: Configurar JDK 17
@@ -40,6 +45,17 @@ jobs:
           LEMBRA_KEYSTORE_PASS: ${{ secrets.LEMBRA_KEYSTORE_PASS }}
         run: gradle assembleRelease --no-daemon
 
+      # Se crea antes de publicar en el repo fdroid: este APK firmado es la
+      # referencia que F-Droid oficial usa para los Reproducible Builds, asi
+      # que debe existir siempre aunque el paso siguiente tenga problemas.
+      - name: Crear release en GitHub con el APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp app/build/outputs/apk/release/app-release.apk "lembra-$GITHUB_REF_NAME.apk"
+          gh release create "$GITHUB_REF_NAME" "lembra-$GITHUB_REF_NAME.apk" \
+            --title "Lembra $GITHUB_REF_NAME" --generate-notes
+
       - name: Descargar repositorio fdroid
         uses: actions/checkout@v7
         with:
@@ -50,12 +66,21 @@ jobs:
       - name: Instalar fdroidserver
         run: pipx install fdroidserver
 
-      - name: Actualizar Ã­ndice F-Droid y publicar
+      - name: Actualizar indice F-Droid y publicar
         env:
           FDROID_KEYSTORE_B64: ${{ secrets.FDROID_KEYSTORE_B64 }}
           FDROID_KEYSTORE_PASS: ${{ secrets.FDROID_KEYSTORE_PASS }}
         run: |
           cd fdroid
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Publicacion robusta: en cada intento re-sincronizamos con el remoto
+          # (git reset --hard origin/main) y regeneramos el indice con fdroid
+          # update, de modo que se incorpora lo que otra app haya publicado a la
+          # vez sin conflictos en los indices binarios (index-v2.json, entry.jar...).
+          for intento in 1 2 3 4 5; do
+          git fetch origin main
+          git reset --hard origin/main
           echo "$FDROID_KEYSTORE_B64" | base64 -d > keystore.p12
           cat > config.yml <<EOF
           repo_url: https://tizzenn.github.io/fdroid/repo
@@ -71,20 +96,11 @@ jobs:
           cp ../app/build/outputs/apk/release/app-release.apk "repo/lembra-$GITHUB_REF_NAME.apk"
           fdroid update --create-metadata --pretty
           rm -f config.yml keystore.p12
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Publicar Lembra $GITHUB_REF_NAME"
-          # Reintentos con rebase por si otra release publico a la vez
-          for intento in 1 2 3; do
-            git push && break
-            git pull --rebase
+          git commit -m "Publicar Lembra $GITHUB_REF_NAME" || true
+          if git push; then echo "Publicado en el intento $intento"; exit 0; fi
+          echo "Push rechazado (intento $intento); re-sincronizando y regenerando indice..."
+          sleep $(( (RANDOM % 8) + 2 ))
           done
-
-      - name: Crear release en GitHub con el APK
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          cp app/build/outputs/apk/release/app-release.apk "lembra-$GITHUB_REF_NAME.apk"
-          gh release create "$GITHUB_REF_NAME" "lembra-$GITHUB_REF_NAME.apk" \
-            --title "Lembra $GITHUB_REF_NAME" --generate-notes
+          echo "No se pudo publicar tras varios intentos" >&2
+          exit 1
