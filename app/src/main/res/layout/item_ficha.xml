@@ -28,22 +28,31 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textoTitulo"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_primary"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                tools:text="Seguro del coche" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-            <ImageView
-                android:id="@+id/iconoCategoria"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginTop="4dp"
-                app:tint="@color/cat_misc"
-                tools:src="@drawable/ic_cat_coche" />
+                <ImageView
+                    android:id="@+id/iconoCategoria"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginEnd="8dp"
+                    app:tint="@color/cat_misc"
+                    tools:src="@drawable/ic_cat_coche" />
+
+                <TextView
+                    android:id="@+id/textoTitulo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/text_primary"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    tools:text="Seguro del coche" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/textoProximoAviso"

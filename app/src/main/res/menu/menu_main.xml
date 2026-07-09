@@ -2,6 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/accionOrden"
+        android:icon="@drawable/ic_ordenar"
+        android:title="@string/accion_ordenar"
+        app:showAsAction="always">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/ordenFechaAsc"
+                    android:title="@string/orden_fecha_asc" />
+                <item
+                    android:id="@+id/ordenFechaDesc"
+                    android:title="@string/orden_fecha_desc" />
+            </group>
+        </menu>
+    </item>
+    <item
         android:id="@+id/accionAjustes"
         android:icon="@drawable/ic_ajustes"
         android:title="@string/accion_ajustes"

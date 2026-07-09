@@ -12,8 +12,8 @@ android {
         applicationId = "com.lembra.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 13
-        versionName = "1.12"
+        versionCode = 14
+        versionName = "1.13"
     }
 
     // F-Droid: no incluir el bloque de metadatos de dependencias (cifrado con

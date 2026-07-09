@@ -111,4 +111,25 @@ object Ajustes {
             .putString(CLAVE_ORDEN_CATEGORIAS, orden.joinToString(",") { it.name })
             .apply()
     }
+
+    // ── Orden de las fichas por fecha en la lista ─────────────────
+
+    private const val CLAVE_ORDEN_FECHA = "orden_fecha"
+
+    fun ordenFecha(context: Context): OrdenFecha =
+        OrdenFecha.fromNombre(prefs(context).getString(CLAVE_ORDEN_FECHA, null))
+
+    fun guardarOrdenFecha(context: Context, orden: OrdenFecha) {
+        prefs(context).edit().putString(CLAVE_ORDEN_FECHA, orden.name).apply()
+    }
+}
+
+/** Sentido de ordenación de las fichas por su próxima fecha. */
+enum class OrdenFecha {
+    ASCENDENTE, DESCENDENTE;
+
+    companion object {
+        fun fromNombre(nombre: String?): OrdenFecha =
+            entries.firstOrNull { it.name == nombre } ?: ASCENDENTE
+    }
 }

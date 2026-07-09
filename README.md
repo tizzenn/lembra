@@ -13,7 +13,8 @@ App Android nativa (Kotlin) para gestionar fichas de alertas/recordatorios recur
 - Notificación local automática X días antes de **cada** ocurrencia (no solo la última).
 - Fichas editables y eliminables (al eliminar/editar se cancelan y reprograman los avisos).
 - Categorías: Coche, Moto, Casa, Mascotas, Niños, Documentación, Licencias y
-  Varios — con filtro en la lista principal.
+  Varios — con filtro en la lista principal y ordenación por fecha (ascendente
+  o descendente).
 - Ajustes: tema blanco/negro/sistema y colores principal y de acento elegibles
   (por defecto los corporativos: negro y rojo).
 - Las alarmas sobreviven a un reinicio del móvil.
@@ -29,12 +30,15 @@ que registrarse, no necesita internet y no envía nada a ningún sitio.
 
 ### La pantalla principal («Mis alertas»)
 
-Es la lista de todas tus fichas. Cada tarjeta muestra el título, cuándo es el
-**próximo aviso** y cuántas repeticiones quedan («Quedan 3 de 12», o
-«Finalizada» cuando ya han pasado todas).
+Es la lista de todas tus fichas. Cada tarjeta muestra, junto al icono de su
+categoría, el título, cuándo es el **próximo aviso** —la fecha y, si le pusiste
+una, también la hora (`fecha - hora`)— y cuántas repeticiones quedan («Quedan 3
+de 12», o «Finalizada» cuando ya han pasado todas).
 
 - **Filtro por categoría** (fila de arriba): toca *Todas* o una categoría para
   ver solo esas fichas.
+- **Ordenar** (icono ⇅ de la barra): ordena las fichas por su próxima fecha,
+  ascendente (lo más cercano primero) o descendente.
 - **Botón `+`** (abajo a la derecha): crear una ficha nueva.
 - **Toca una tarjeta** para editarla.
 - **Menú ⋮ → Ajustes**: apariencia, orden de categorías y copia de seguridad.

@@ -252,7 +252,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="@string/boton_guardar" />
+                android:text="@string/boton_guardar"
+                android:textColor="@android:color/white" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/botonEliminar"

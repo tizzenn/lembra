@@ -6,6 +6,9 @@
     <string name="sin_fichas">No tienes fichas todavía.\nToca + para crear la primera.</string>
     <string name="filtro_todas">Todas</string>
     <string name="accion_ajustes">Ajustes</string>
+    <string name="accion_ordenar">Ordenar</string>
+    <string name="orden_fecha_asc">Fecha ascendente</string>
+    <string name="orden_fecha_desc">Fecha descendente</string>
 
     <!-- Categorías -->
     <string name="cat_coche">Coche</string>

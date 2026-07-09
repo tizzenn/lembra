@@ -6,6 +6,9 @@
     <string name="sin_fichas">No cards yet.\nTap + to create your first one.</string>
     <string name="filtro_todas">All</string>
     <string name="accion_ajustes">Settings</string>
+    <string name="accion_ordenar">Sort</string>
+    <string name="orden_fecha_asc">Date ascending</string>
+    <string name="orden_fecha_desc">Date descending</string>
 
     <!-- Categories -->
     <string name="cat_coche">Car</string>

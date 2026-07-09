@@ -13,7 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.lembra.app.config.Ajustes
+import com.lembra.app.config.OrdenFecha
 import com.lembra.app.data.AppDatabase
+import com.lembra.app.data.CalculadoraOcurrencias
 import com.lembra.app.data.Categoria
 import com.lembra.app.data.FichaAlerta
 import com.lembra.app.databinding.ActivityMainBinding
@@ -65,13 +67,32 @@ class MainActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        // Marca el sentido de orden guardado
+        when (Ajustes.ordenFecha(this)) {
+            OrdenFecha.ASCENDENTE -> menu.findItem(R.id.ordenFechaAsc)
+            OrdenFecha.DESCENDENTE -> menu.findItem(R.id.ordenFechaDesc)
+        }.isChecked = true
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.accionAjustes) {
-            startActivity(Intent(this, SettingsActivity::class.java))
-            return true
+        when (item.itemId) {
+            R.id.accionAjustes -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+                return true
+            }
+            R.id.ordenFechaAsc -> {
+                item.isChecked = true
+                Ajustes.guardarOrdenFecha(this, OrdenFecha.ASCENDENTE)
+                aplicarFiltro()
+                return true
+            }
+            R.id.ordenFechaDesc -> {
+                item.isChecked = true
+                Ajustes.guardarOrdenFecha(this, OrdenFecha.DESCENDENTE)
+                aplicarFiltro()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -110,11 +131,29 @@ class MainActivity : BaseActivity() {
             todasLasFichas.filter { it.categoria == cat.name }
         } ?: todasLasFichas
 
-        adapter.submitList(filtradas)
+        val ordenadas = ordenarPorFecha(filtradas)
+
+        adapter.submitList(ordenadas)
         binding.textoVacio.visibility =
-            if (filtradas.isEmpty()) android.view.View.VISIBLE else android.view.View.GONE
+            if (ordenadas.isEmpty()) android.view.View.VISIBLE else android.view.View.GONE
         binding.recyclerView.visibility =
-            if (filtradas.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
+            if (ordenadas.isEmpty()) android.view.View.GONE else android.view.View.VISIBLE
+    }
+
+    /**
+     * Ordena las fichas por su próxima fecha (asc/desc según Ajustes).
+     * Las finalizadas (sin próxima ocurrencia) van siempre al final.
+     */
+    private fun ordenarPorFecha(fichas: List<FichaAlerta>): List<FichaAlerta> {
+        val (conFecha, sinFecha) = fichas
+            .map { it to CalculadoraOcurrencias.proximaOcurrencia(it)?.first }
+            .partition { it.second != null }
+        val ascendentes = conFecha.sortedBy { it.second }
+        val dirigidas = when (Ajustes.ordenFecha(this)) {
+            OrdenFecha.ASCENDENTE -> ascendentes
+            OrdenFecha.DESCENDENTE -> ascendentes.reversed()
+        }
+        return (dirigidas + sinFecha).map { it.first }
     }
 
     private fun pedirPermisoNotificacionesSiHaceFalta() {

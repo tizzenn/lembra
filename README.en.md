@@ -15,7 +15,8 @@ vehicle inspections, service checks, pet vaccines, and so on.
 - Automatic local notification X days before **each** occurrence (not just the last one).
 - Records can be edited and deleted (editing/deleting cancels and reschedules the alerts).
 - Categories: Car, Motorbike, Home, Pets, Kids, Documents, Licences and
-  Miscellaneous — with a filter on the main list.
+  Miscellaneous — with a filter on the main list and sorting by date (ascending
+  or descending).
 - Settings: white/black/system theme and a choice of primary and accent colors
   (corporate black and red by default).
 - Alarms survive a phone reboot.
@@ -32,11 +33,14 @@ anywhere.
 
 ### The main screen ("My alerts")
 
-The list of all your records. Each card shows the title, when the **next alert**
-is, and how many repetitions are left ("3 of 12 left", or "Finished" once they
-have all passed).
+The list of all your records. Each card shows, next to its category icon, the
+title, when the **next alert** is —the date and, if you set one, the time too
+(`date - time`)— and how many repetitions are left ("3 of 12 left", or
+"Finished" once they have all passed).
 
 - **Category filter** (top row): tap *All* or a category to see only those records.
+- **Sort** (the ⇅ icon in the bar): sort records by their next date, ascending
+  (soonest first) or descending.
 - **`+` button** (bottom right): create a new record.
 - **Tap a card** to edit it.
 - **⋮ menu → Settings**: appearance, category order and backup.

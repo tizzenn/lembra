@@ -11,4 +11,8 @@
          con el fondo (#121212): toolbar y botones siguen distinguibles. -->
     <color name="paleta_negro">#37373D</color>
     <color name="paleta_negro_oscuro">#232327</color>
+
+    <!-- Borde y texto de los botones con contorno (Exportar/Importar, tema…):
+         en oscuro se aclaran para destacar sobre el fondo #121212. -->
+    <color name="boton_contorno">#C9C9D1</color>
 </resources>
