@@ -7,6 +7,14 @@ vehicle inspections, service checks, pet vaccines, and so on.
 
 > Built with [Claude Code](https://claude.com/claude-code) (Claude Fable 5 model, Anthropic's Claude 5 family).
 
+## Screenshots
+
+<p>
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="240" alt="Alerts list">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" width="240" alt="Create a card">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="240" alt="Settings">
+</p>
+
 ## Features
 
 - Records with: title, category, start date, optional time and location,

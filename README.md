@@ -6,6 +6,14 @@ App Android nativa (Kotlin) para gestionar fichas de alertas/recordatorios recur
 
 > Hecha con [Claude Code](https://claude.com/claude-code) (modelo Claude Fable 5, familia Claude 5 de Anthropic).
 
+## Capturas
+
+<p>
+  <img src="fastlane/metadata/android/es-ES/images/phoneScreenshots/1.png" width="240" alt="Lista de alertas">
+  <img src="fastlane/metadata/android/es-ES/images/phoneScreenshots/2.png" width="240" alt="Crear una ficha">
+  <img src="fastlane/metadata/android/es-ES/images/phoneScreenshots/3.png" width="240" alt="Ajustes">
+</p>
+
 ## Funcionalidad
 
 - Fichas con: título, categoría, fecha de inicio, hora y ubicación opcionales,
