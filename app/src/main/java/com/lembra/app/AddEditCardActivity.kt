@@ -17,7 +17,9 @@ import com.google.android.material.chip.Chip
 import com.lembra.app.calendario.CalendarioInfo
 import com.lembra.app.calendario.CalendarioSync
 import com.lembra.app.data.AppDatabase
+import com.lembra.app.data.CatalogoCategorias
 import com.lembra.app.data.Categoria
+import com.lembra.app.data.CategoriaInfo
 import com.lembra.app.data.FichaAlerta
 import com.lembra.app.data.UnidadRepeticion
 import com.lembra.app.databinding.ActivityAddEditCardBinding
@@ -36,7 +38,10 @@ class AddEditCardActivity : BaseActivity() {
 
     private var fichaId: Long = -1L
     private var fichaExistente: FichaAlerta? = null
-    private var categoriaSeleccionada: Categoria = Categoria.MISC
+
+    /** Catálogo (fijas + personalizadas) en orden; se carga al abrir. */
+    private var catalogoCategorias: List<CategoriaInfo> = emptyList()
+    private var categoriaSeleccionada: String = Categoria.MISC.name
     private var fechaInicioMillis: Long? = null
     private var horaMinutos: Int = -1
     private var unidadIndice: Int = 0
@@ -68,7 +73,6 @@ class AddEditCardActivity : BaseActivity() {
             if (fichaId == -1L) R.string.titulo_nueva_ficha else R.string.titulo_editar_ficha
         )
 
-        configurarChipsCategoria()
         configurarDesplegableUnidad()
         configurarCampoFecha()
         configurarCampoHora()
@@ -77,20 +81,28 @@ class AddEditCardActivity : BaseActivity() {
         binding.botonGuardar.setOnClickListener { guardar() }
         binding.botonEliminar.setOnClickListener { confirmarEliminar() }
 
-        if (fichaId != -1L) {
-            binding.botonEliminar.visibility = View.VISIBLE
-            cargarFicha()
+        // Primero el catálogo (incluye personalizadas de BD) y después la
+        // ficha, para que la selección de categoría encuentre su chip.
+        lifecycleScope.launch {
+            catalogoCategorias =
+                CatalogoCategorias.catalogo(this@AddEditCardActivity, dao.obtenerCategoriasSuspend())
+            configurarChipsCategoria()
+            if (fichaId != -1L) {
+                binding.botonEliminar.visibility = View.VISIBLE
+                cargarFicha()
+            }
         }
     }
 
     private fun configurarChipsCategoria() {
-        Categoria.entries.forEach { categoria ->
+        binding.chipGroupCategoria.removeAllViews()
+        catalogoCategorias.forEach { categoria ->
             val chip = crearChipIcono(
-                this, categoria.iconoRes, categoria.colorRes, getString(categoria.nombreRes)
+                this, categoria.iconoRes, categoria.color, categoria.nombre
             ).apply {
-                isChecked = categoria == categoriaSeleccionada
+                isChecked = categoria.clave == categoriaSeleccionada
             }
-            chip.setOnClickListener { categoriaSeleccionada = categoria }
+            chip.setOnClickListener { categoriaSeleccionada = categoria.clave }
             binding.chipGroupCategoria.addView(chip)
         }
     }
@@ -221,10 +233,10 @@ class AddEditCardActivity : BaseActivity() {
                 binding.campoHora.setText(textoHora(horaMinutos))
             }
 
-            categoriaSeleccionada = Categoria.fromNombre(ficha.categoria)
+            categoriaSeleccionada = ficha.categoria
             for (i in 0 until binding.chipGroupCategoria.childCount) {
                 val chip = binding.chipGroupCategoria.getChildAt(i) as Chip
-                chip.isChecked = Categoria.entries[i] == categoriaSeleccionada
+                chip.isChecked = catalogoCategorias[i].clave == categoriaSeleccionada
             }
 
             val unidad = UnidadRepeticion.fromNombre(ficha.unidadRepeticion)
@@ -273,7 +285,7 @@ class AddEditCardActivity : BaseActivity() {
         val ficha = FichaAlerta(
             id = if (fichaId == -1L) 0 else fichaId,
             titulo = titulo,
-            categoria = categoriaSeleccionada.name,
+            categoria = categoriaSeleccionada,
             fechaInicioMillis = fecha,
             repetirCada = repetirCada,
             unidadRepeticion = unidad.name,

@@ -44,4 +44,10 @@
     <color name="cat_documentacion">#3949AB</color>
     <color name="cat_licencias">#00838F</color>
     <color name="cat_misc">#616161</color>
+
+    <!-- Colores extra elegibles para categorías personalizadas -->
+    <color name="cat_rojo">#E53935</color>
+    <color name="cat_verde">#2E7D32</color>
+    <color name="cat_marron">#6D4C41</color>
+    <color name="cat_amarillo">#F9A825</color>
 </resources>

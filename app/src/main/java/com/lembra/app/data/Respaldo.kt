@@ -4,18 +4,40 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 /**
- * Copia de seguridad de las fichas en JSON plano. No incluye la
- * vinculación al calendario (los ids de calendario no valen en otro
- * dispositivo); al restaurar, esa opción queda desactivada.
+ * Copia de seguridad de las fichas (y categorías personalizadas) en JSON
+ * plano. No incluye la vinculación al calendario (los ids de calendario no
+ * valen en otro dispositivo); al restaurar, esa opción queda desactivada.
  */
 object Respaldo {
 
-    private const val FORMATO = 1
+    private const val FORMATO = 2
 
-    fun exportar(fichas: List<FichaAlerta>): String {
+    /** Contenido leído de un respaldo; las fichas aún llevan las claves
+     *  P:<id> del dispositivo de origen (remapear al importar). */
+    data class Datos(
+        val fichas: List<FichaAlerta>,
+        val categorias: List<CategoriaPersonalizada>
+    )
+
+    fun exportar(
+        fichas: List<FichaAlerta>,
+        categorias: List<CategoriaPersonalizada>
+    ): String {
         val raiz = JSONObject()
         raiz.put("app", "lembra")
         raiz.put("formato", FORMATO)
+
+        val jCategorias = JSONArray()
+        for (c in categorias) {
+            val j = JSONObject()
+            j.put("id", c.id)
+            j.put("nombre", c.nombre)
+            j.put("icono", c.icono)
+            j.put("color", c.color)
+            jCategorias.put(j)
+        }
+        raiz.put("categorias", jCategorias)
+
         val jFichas = JSONArray()
         for (f in fichas) {
             val j = JSONObject()
@@ -35,15 +57,30 @@ object Respaldo {
         return raiz.toString(2)
     }
 
-    /** Lee las fichas de un respaldo (sin id, listas para insertar). */
-    fun leer(texto: String): List<FichaAlerta> {
+    /** Lee un respaldo (formato 1 o 2); las fichas van sin id, listas para insertar. */
+    fun leer(texto: String): Datos {
         val raiz = JSONObject(texto)
         require(raiz.optString("app") == "lembra") { "No es un respaldo de Lembra" }
+
+        val categorias = mutableListOf<CategoriaPersonalizada>()
+        val jCategorias = raiz.optJSONArray("categorias") ?: JSONArray()
+        for (i in 0 until jCategorias.length()) {
+            val j = jCategorias.getJSONObject(i)
+            categorias.add(
+                CategoriaPersonalizada(
+                    id = j.optLong("id"),
+                    nombre = j.optString("nombre"),
+                    icono = j.optString("icono"),
+                    color = j.optString("color")
+                )
+            )
+        }
+
+        val fichas = mutableListOf<FichaAlerta>()
         val jFichas = raiz.getJSONArray("fichas")
-        val resultado = mutableListOf<FichaAlerta>()
         for (i in 0 until jFichas.length()) {
             val j = jFichas.getJSONObject(i)
-            resultado.add(
+            fichas.add(
                 FichaAlerta(
                     titulo = j.optString("titulo"),
                     categoria = j.optString("categoria", Categoria.MISC.name),
@@ -60,6 +97,6 @@ object Respaldo {
                 )
             )
         }
-        return resultado
+        return Datos(fichas, categorias)
     }
 }

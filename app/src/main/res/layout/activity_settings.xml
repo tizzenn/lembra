@@ -117,6 +117,18 @@
                 android:orientation="vertical"
                 android:layout_marginTop="8dp" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNuevaCategoria"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/cat_nueva"
+                android:textColor="@color/boton_contorno"
+                app:icon="@drawable/ic_agregar"
+                app:iconTint="@color/boton_contorno"
+                app:strokeColor="@color/boton_contorno" />
+
             <TextView
                 style="@style/Lembra.TextoSeccion"
                 android:layout_width="match_parent"

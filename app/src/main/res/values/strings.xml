@@ -12,7 +12,7 @@
 
     <!-- Categories -->
     <string name="cat_coche">Car</string>
-    <string name="cat_moto">Motorbike</string>
+    <string name="cat_celebraciones">Celebrations</string>
     <string name="cat_casa">Home</string>
     <string name="cat_mascotas">Pets</string>
     <string name="cat_ninos">Kids</string>
@@ -63,7 +63,15 @@
     <string name="tema_sistema">System</string>
     <string name="ajustes_color_principal">Primary color</string>
     <string name="ajustes_color_acento">Accent color</string>
-    <string name="ajustes_orden_categorias">Category order</string>
+    <string name="ajustes_orden_categorias">Categories</string>
+    <string name="cat_nueva">New category</string>
+    <string name="cat_editar">Edit category</string>
+    <string name="cat_nombre">Name</string>
+    <string name="cat_icono">Icon</string>
+    <string name="cat_color">Color</string>
+    <string name="cat_error_nombre">Give the category a name</string>
+    <string name="cat_eliminar_titulo">Delete category</string>
+    <string name="cat_eliminar_mensaje">Its cards will move to the Other category.</string>
     <string name="ajustes_respaldo">Backup</string>
     <string name="accion_exportar">Export</string>
     <string name="accion_importar">Import</string>

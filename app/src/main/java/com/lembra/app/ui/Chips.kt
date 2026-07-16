@@ -1,6 +1,8 @@
 package com.lembra.app.ui
 
 import android.content.Context
+import android.content.res.ColorStateList
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -24,7 +26,7 @@ fun crearChipColor(
 fun crearChipIcono(
     context: Context,
     @DrawableRes iconoRes: Int,
-    @ColorRes colorRes: Int,
+    @ColorInt color: Int,
     nombre: String
 ): Chip {
     val densidad = context.resources.displayMetrics.density
@@ -34,7 +36,7 @@ fun crearChipIcono(
         isCheckedIconVisible = false
         setChipIconResource(iconoRes)
         isChipIconVisible = true
-        chipIconTint = ContextCompat.getColorStateList(context, colorRes)
+        chipIconTint = ColorStateList.valueOf(color)
         contentDescription = nombre
         textStartPadding = 0f
         textEndPadding = 0f

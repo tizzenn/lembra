@@ -96,19 +96,19 @@ object Ajustes {
 
     private const val CLAVE_ORDEN_CATEGORIAS = "orden_categorias"
 
-    fun ordenCategorias(context: Context): List<com.lembra.app.data.Categoria> {
-        val guardado = prefs(context).getString(CLAVE_ORDEN_CATEGORIAS, null)
-        val nombres = guardado?.split(",").orEmpty()
-        val ordenadas = nombres.mapNotNull { nombre ->
-            com.lembra.app.data.Categoria.entries.firstOrNull { it.name == nombre }
-        }
-        // Las categorías que no estén en la preferencia (nuevas) van al final
-        return ordenadas + com.lembra.app.data.Categoria.entries.filter { !ordenadas.contains(it) }
-    }
+    /**
+     * Claves de categoría en el orden elegido por el usuario: nombres del
+     * enum para las fijas y `P:<id>` para las personalizadas. Puede contener
+     * claves ya inexistentes (se ignoran al resolver) y no contener las
+     * nuevas (van al final; ver CatalogoCategorias.catalogo).
+     */
+    fun ordenClaves(context: Context): List<String> =
+        prefs(context).getString(CLAVE_ORDEN_CATEGORIAS, null)
+            ?.split(",")?.filter { it.isNotBlank() }.orEmpty()
 
-    fun guardarOrdenCategorias(context: Context, orden: List<com.lembra.app.data.Categoria>) {
+    fun guardarOrdenClaves(context: Context, claves: List<String>) {
         prefs(context).edit()
-            .putString(CLAVE_ORDEN_CATEGORIAS, orden.joinToString(",") { it.name })
+            .putString(CLAVE_ORDEN_CATEGORIAS, claves.joinToString(","))
             .apply()
     }
 

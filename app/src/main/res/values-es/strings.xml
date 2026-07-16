@@ -12,7 +12,7 @@
 
     <!-- Categorías -->
     <string name="cat_coche">Coche</string>
-    <string name="cat_moto">Moto</string>
+    <string name="cat_celebraciones">Celebraciones</string>
     <string name="cat_casa">Casa</string>
     <string name="cat_mascotas">Mascotas</string>
     <string name="cat_ninos">Niños</string>
@@ -63,7 +63,15 @@
     <string name="tema_sistema">Sistema</string>
     <string name="ajustes_color_principal">Color principal</string>
     <string name="ajustes_color_acento">Color de acento</string>
-    <string name="ajustes_orden_categorias">Orden de categorías</string>
+    <string name="ajustes_orden_categorias">Categorías</string>
+    <string name="cat_nueva">Nueva categoría</string>
+    <string name="cat_editar">Editar categoría</string>
+    <string name="cat_nombre">Nombre</string>
+    <string name="cat_icono">Icono</string>
+    <string name="cat_color">Color</string>
+    <string name="cat_error_nombre">Ponle un nombre a la categoría</string>
+    <string name="cat_eliminar_titulo">Eliminar categoría</string>
+    <string name="cat_eliminar_mensaje">Sus fichas pasarán a la categoría Varios.</string>
     <string name="ajustes_respaldo">Copia de seguridad</string>
     <string name="accion_exportar">Exportar</string>
     <string name="accion_importar">Importar</string>

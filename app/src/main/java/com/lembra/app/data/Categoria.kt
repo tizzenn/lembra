@@ -14,7 +14,9 @@ enum class Categoria(
     @DrawableRes val iconoRes: Int
 ) {
     COCHE(R.string.cat_coche, R.color.cat_coche, R.drawable.ic_cat_coche),
-    MOTO(R.string.cat_moto, R.color.cat_moto, R.drawable.ic_cat_moto),
+    // Constante MOTO conservada por compatibilidad con fichas/backups previos;
+    // ahora representa "Celebraciones" (icono de tarta).
+    MOTO(R.string.cat_celebraciones, R.color.cat_moto, R.drawable.ic_cat_tarta),
     CASA(R.string.cat_casa, R.color.cat_casa, R.drawable.ic_cat_casa),
     MASCOTAS(R.string.cat_mascotas, R.color.cat_mascotas, R.drawable.ic_cat_mascotas),
     NINOS(R.string.cat_ninos, R.color.cat_ninos, R.drawable.ic_cat_ninos),

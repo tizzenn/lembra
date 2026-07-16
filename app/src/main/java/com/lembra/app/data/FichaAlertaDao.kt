@@ -27,4 +27,25 @@ interface FichaAlertaDao {
 
     @Delete
     suspend fun eliminar(ficha: FichaAlerta)
+
+    // ── Categorías personalizadas ─────────────────────────────────
+
+    @Query("SELECT * FROM categorias_personalizadas ORDER BY id ASC")
+    fun observarCategorias(): Flow<List<CategoriaPersonalizada>>
+
+    @Query("SELECT * FROM categorias_personalizadas ORDER BY id ASC")
+    suspend fun obtenerCategoriasSuspend(): List<CategoriaPersonalizada>
+
+    @Insert
+    suspend fun insertarCategoria(categoria: CategoriaPersonalizada): Long
+
+    @Update
+    suspend fun actualizarCategoria(categoria: CategoriaPersonalizada)
+
+    @Delete
+    suspend fun eliminarCategoria(categoria: CategoriaPersonalizada)
+
+    /** Al borrar una categoría, sus fichas pasan a otra (Varios). */
+    @Query("UPDATE fichas_alerta SET categoria = :nueva WHERE categoria = :vieja")
+    suspend fun reasignarCategoria(vieja: String, nueva: String)
 }

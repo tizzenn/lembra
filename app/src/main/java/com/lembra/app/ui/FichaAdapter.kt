@@ -1,13 +1,14 @@
 package com.lembra.app.ui
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lembra.app.data.CalculadoraOcurrencias
-import com.lembra.app.data.Categoria
+import com.lembra.app.data.CatalogoCategorias
+import com.lembra.app.data.CategoriaPersonalizada
 import com.lembra.app.data.FichaAlerta
 import com.lembra.app.databinding.ItemFichaBinding
 import java.text.DateFormat
@@ -18,6 +19,16 @@ class FichaAdapter(
 
     private val formatoFecha = DateFormat.getDateInstance()
     private val formatoHora = DateFormat.getTimeInstance(DateFormat.SHORT)
+
+    /** Categorías personalizadas vigentes, para resolver las claves P:<id>. */
+    private var personalizadas: List<CategoriaPersonalizada> = emptyList()
+
+    @Suppress("NotifyDataSetChanged") // cambian potencialmente todas las filas
+    fun actualizarCategorias(nuevas: List<CategoriaPersonalizada>) {
+        if (nuevas == personalizadas) return
+        personalizadas = nuevas
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FichaViewHolder {
         val binding = ItemFichaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,17 +43,14 @@ class FichaAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(ficha: FichaAlerta) {
-            val categoria = Categoria.fromNombre(ficha.categoria)
             val contexto = binding.root.context
+            val categoria = CatalogoCategorias.resolver(contexto, ficha.categoria, personalizadas)
 
             binding.textoTitulo.text = ficha.titulo
             binding.iconoCategoria.setImageResource(categoria.iconoRes)
-            binding.iconoCategoria.imageTintList =
-                ContextCompat.getColorStateList(contexto, categoria.colorRes)
-            binding.iconoCategoria.contentDescription = contexto.getString(categoria.nombreRes)
-            binding.indicadorCategoria.setBackgroundColor(
-                ContextCompat.getColor(contexto, categoria.colorRes)
-            )
+            binding.iconoCategoria.imageTintList = ColorStateList.valueOf(categoria.color)
+            binding.iconoCategoria.contentDescription = categoria.nombre
+            binding.indicadorCategoria.setBackgroundColor(categoria.color)
 
             val proxima = CalculadoraOcurrencias.proximaOcurrencia(ficha)
             if (proxima != null) {
